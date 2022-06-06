@@ -29,7 +29,7 @@ At the end, results in testing performance are compared between the different mo
 ## Method
 In this method section the follow three aspects are described: our chosen network YoloV4, datasets, data augmentation and training method.
 
-### YoloV4 (Darknet)
+### YoloV4
 Starting of this project we had to choose a neural network in order to create a detection method that would be most suitable for detecting golf balls on a driving range. During starting phase of this project we have examined the following options for our network: our own implementation of an object region proposal network along with a ResNet-50, RefineDet [4], SNIP [5], SNIPER [6] and YoloV4 [1]. Implementing our own network would not be feasible in our time span. RefineDet, SNIP and SNIPER did either not have code that could be executed by us due to hardware constraints or did not include the necessary documentation to train a model. This was quite disappointing since SNIP and SNIPER seemed very promising due to their scale invariance. This left us with the YoloV4 algorithm. This network had good documentation on how to train a model and community support. Below some more details on this:
 
 1. Easy Google Colab Integration
@@ -42,6 +42,31 @@ When using neural networks there are a lot of factors that may form timing consu
 * Other unforeseen errors
 
 Along with the well acknowledged paper on YoloV4, we also made use of a blog post [7] covering some details about how to train a model yourself.
+
+#### Architecture
+
+##### Yolo history
+
+##### YoloV4
+Backbone: CSPDarknet53
+• Neck: SPP  PAN 
+• Head: YOLOv3 
+YOLO v4 uses:
+• Bag of Freebies (BoF) for backbone: CutMix and
+Mosaic data augmentation, DropBlock regularization,
+Class label smoothing
+• Bag of Specials (BoS) for backbone: Mish activa-
+tion, Cross-stage partial connections (CSP), Multi-
+input weighted residual connections (MiWRC)
+• Bag of Freebies (BoF) for detector: CIoU-loss,
+CmBN, DropBlock regularization, Mosaic data aug-
+mentation, Self-Adversarial Training, Eliminate grid
+sensitivity, Using multiple anchors for a single ground
+truth, Cosine annealing scheduler [52], Optimal hyper-
+parameters, Random training shapes
+• Bag of Specials (BoS) for detector: Mish activation,
+SPP-block, SAM-block, PAN path-aggregation block,
+DIoU-NMS
 
 ### Datasets
 Two different datasets were used to train separate YoloV4 models to compare. The first dataset was found on **WEBSITE DATASET 1*. The second dataset was found on "universe.roboflow.com"
@@ -75,6 +100,9 @@ YoloV4 itself comes with data augmentation as well. It makes use of the followin
 1. Self-Adversarial Training
 2. Mosaic data augmentation
 3. Random data shapes (Resizing inputs before passing through network)
+
+
+Self-Adversarial Training is a form of data augmentation where the forward pass of the network is used to augment the input image. Instead of one forward pass and one backward pass it performs the forward pass twice. First on the input image, then it alters the input image to create the deception that there is no object in the input image. Then it performs forwards pass on that augmented image and then regular backward pass.
 
 Filter out the golf balls with small bounding boxes from the original training dataset and tiling those images (cutting those image up into small smaller images). The ideas behind this is that training on only those tiled and thus very small images will increase the networks ability to detect the small golf balls located at long distances on the driving range since those are small as well.
 
