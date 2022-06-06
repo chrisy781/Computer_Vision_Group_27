@@ -1,10 +1,11 @@
+# Enhancing Golf Ball Detection on a Driving Range using Computer Vision
+
 | Student Name       | Student ID | e-mail                             |
 | ------------------ | ---------- | ---------------------------------- |
 | Christiaan Wiers   |            | ...@student.tudelft.nl             |
 | Stijn Lafontaine   | 4908457    | S.C.Lafontaine@student.tudelft.nl  |
 | Floris             |            | ...@student.tudelft.nl             |
 
-# 
 
 ## Table of Contents
 1. Abstract
