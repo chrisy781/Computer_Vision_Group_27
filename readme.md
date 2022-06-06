@@ -77,6 +77,14 @@ DIoU-NMS
 ### Datasets
 Two different datasets were used to train separate YoloV4 models to compare. The first dataset was found on **WEBSITE DATASET 1*. The second dataset was found on "universe.roboflow.com"
 
+![Dataset1](/figures/dataset1.jpg)
+
+*Figure 1: Sample from dataset 1*
+
+![Dataset2](/figures/dataset2.jpg)
+
+*Figure 2: Sample from dataset2*
+
 ### Data augmentation
 We applied data augmentation on both datasets. 
 
@@ -99,11 +107,11 @@ YoloV4 itself comes with data augmentation as well. It makes use of the followin
 
 ![CutMix](/figures/cutmix.png)
 
-*Figure 1: CutMix data augmentation example proposed by Yun et al. [8]*
+*Figure 3: CutMix data augmentation example proposed by Yun et al. [8]*
 
 ![Mosaic](/figures/Mosaic_data_augmentation.png)
 
-*Figure 1: Mosaic data augmentation example proposed by Bochkovskiy et al. [1]*
+*Figure 4: Mosaic data augmentation example proposed by Bochkovskiy et al. [1]*
 
 **For the detector (region proposal network)[1]:**
 1. Self-Adversarial Training
