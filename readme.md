@@ -1,4 +1,4 @@
-# Enhancing Golf Ball Detection on a Driving Range using Computer Vision
+# Golf Ball Detection on a Driving Range using Computer Vision
 
 | Student Name       | Student ID | e-mail                             |
 | ------------------ | ---------- | ---------------------------------- |
