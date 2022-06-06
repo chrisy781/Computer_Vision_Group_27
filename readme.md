@@ -77,11 +77,11 @@ DIoU-NMS
 ### Datasets
 Two different datasets were used to train separate YoloV4 models to compare. The first dataset was found on **WEBSITE DATASET 1*. The second dataset was found on "universe.roboflow.com"
 
-![Dataset1](/figures/dataset1.jpg)
+![Dataset1](/figures/Dataset1.jpg)
 
 *Figure 1: Sample from dataset 1*
 
-![Dataset2](/figures/dataset2.jpg)
+![Dataset2](/figures/Dataset2.jpg)
 
 *Figure 2: Sample from dataset2*
 
