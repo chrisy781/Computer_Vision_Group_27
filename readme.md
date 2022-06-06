@@ -102,7 +102,7 @@ YoloV4 itself comes with data augmentation as well. It makes use of the followin
 3. Random data shapes (Resizing inputs before passing through network)
 
 
-Self-Adversarial Training is a form of data augmentation where the forward pass of the network is used to augment the input image. Instead of one forward pass and one backward pass it performs the forward pass twice. First on the input image, then it alters the input image to create the deception that there is no object in the input image. Then it performs forwards pass on that augmented image and then regular backward pass.
+**Self-Adversarial Training** is a form of data augmentation where the forward pass of the network is used to augment the input image. Instead of one forward pass and one backward pass it performs the forward pass twice. First on the input image, then it alters the input image to create the deception that there is no object in the input image. Then it performs forwards pass on that augmented image and then regular backward pass.
 
 Filter out the golf balls with small bounding boxes from the original training dataset and tiling those images (cutting those image up into small smaller images). The ideas behind this is that training on only those tiled and thus very small images will increase the networks ability to detect the small golf balls located at long distances on the driving range since those are small as well.
 
@@ -110,11 +110,7 @@ Filter out the golf balls with small bounding boxes from the original training d
 
 ## Experiments and Results
 
-
-
 ## Conclusion
-
-
 
 ## Discussion
 
