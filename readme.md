@@ -64,9 +64,11 @@ YoloV4 itself comes with data augmentation as well. It makes use of the followin
 2. Mosaic data augmentation
 
 ![CutMix](/figures/cutmix.png)
+
 *Figure 1: CutMix data augmentation example proposed by Yun et al. [8]*
 
-![Mosaic](/figures/Mosaic_data_augementation.png)
+![Mosaic](/figures/Mosaic_data_augmentation.png)
+
 *Figure 1: Mosaic data augmentation example proposed by Bochkovskiy et al. [1]*
 
 **For the detector (region proposal network)[1]:**
