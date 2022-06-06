@@ -4,7 +4,9 @@
 | Stijn Lafontaine   | 4908457    | S.C.Lafontaine@student.tudelft.nl  |
 | Floris             |            | ...@student.tudelft.nl             |
 
- Table of Contents
+# 
+
+## Table of Contents
 1. Abstract
 2. Introduction
 3. Method
