@@ -6,6 +6,7 @@
 | Stijn Lafontaine   | 4908457    | S.C.Lafontaine@student.tudelft.nl  |
 | Floris             |            | ...@student.tudelft.nl             |
 
+![Driving_range](/figures/drivingrange.jpg)
 
 ## Table of Contents
 1. Abstract
