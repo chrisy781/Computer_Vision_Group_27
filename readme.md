@@ -50,8 +50,10 @@ Along with the well acknowledged paper on YoloV4, we also made use of a blog pos
 #### Architecture
 
 ##### Yolo history
+**EXPANATION YOLO, YOLOV2, YOLOV3 in a nutshell**
 
 ##### YoloV4
+**PARTS USED IN YOLOV4, building on history**
 Backbone: CSPDarknet53
 • Neck: SPP  PAN 
 • Head: YOLOv3 
@@ -81,11 +83,14 @@ We applied data augmentation on both datasets.
 The following techniques were used on the first dataset **NAME**:
 1. Brightness increase/decrease
 2. Rotate images left/right
+3. Tiling
+
+**Tiling** is a method where the image is cut in multiple smaller images by use of a grid. This is a form of data augmentation. These smaller images then form the input of a model to train on. This method is proposed in a paper by Li et al. [9]
 
 The following techniques were used on the second dataset (Roboflow):
 1. Brightness increase/decrease
 
-The second dataset did not need the rotation since it contained more datapoints.
+The second dataset did not need the rotation and tiling since it contained more datapoints. Tiling was also not feasable since this dataset did not contain many images that contained multiple golfballs
 
 YoloV4 itself comes with data augmentation as well. It makes use of the following techniques:
 **For the backbone (classifier)[1]:**
@@ -127,3 +132,4 @@ Filter out the golf balls with small bounding boxes from the original training d
 6. Singh, B., Najibi, M., & Davis, L. S. (2018). Sniper: Efficient multi-scale training. Advances in neural information processing systems, 31
 7. https://techzizou.com/train-a-custom-yolov4-detector-using-google-colab-tutorial-for-beginners/
 8. Yun, S., Han, D., Oh, S. J., Chun, S., Choe, J., & Yoo, Y. (2019). Cutmix: Regularization strategy to train strong classifiers with localizable features. In Proceedings of the IEEE/CVF international conference on computer vision (pp. 6023-6032).
+9. Li, R., Wang, R., Zhang, J., Xie, C., Liu, L., Wang, F., ... & Liu, W. (2019). An effective data augmentation strategy for CNN-based pest localization and recognition in the field. IEEE Access, 7, 160274-160283.
