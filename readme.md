@@ -145,7 +145,7 @@ cv2_imshow(thresh)
 
 ## Experiments and Results
 ### Pre-processing Test Images results
-![Normal](/figures/normal_2.jpeg)
+![Normal](/figures/normal_2.jpeg | width= 250)
 *Figure 5: Shows the detection results on the YoloV4 network using a none pre-precossed test image*
 ![Sharpness](/figures/sharpness_kernel_2.jpeg)
 *Figure 6: Shows the detection results on the YoloV4 network using a sharpness enhanced test image*
