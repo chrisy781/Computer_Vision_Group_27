@@ -2,7 +2,7 @@
 
 | Student Name       | Student ID | e-mail                             |
 | ------------------ | ---------- | ---------------------------------- |
-| Christiaan Wiers   |            | ...@student.tudelft.nl             |
+| Christiaan Wiers   | 4715349    | C.W.M.Wiers@student.tudelft.nl     |
 | Stijn Lafontaine   | 4908457    | S.C.Lafontaine@student.tudelft.nl  |
 | Floris             |            | ...@student.tudelft.nl             |
 
@@ -31,7 +31,8 @@ At the end, results in testing performance are compared between the different mo
 
 
 ## Method
-In this method section the follow three aspects are described: our chosen network YoloV4, datasets, data augmentation and training method.
+In this method section the follow three aspects are described: our chosen network YoloV4, datasets, data augmentation, training method, pre-processing test images.
+
 
 ### YoloV4
 Starting of this project we had to choose a neural network in order to create a detection method that would be most suitable for detecting golf balls on a driving range. During starting phase of this project we have examined the following options for our network: our own implementation of an object region proposal network along with a ResNet-50, RefineDet [4], SNIP [5], SNIPER [6] and YoloV4 [1]. Implementing our own network would not be feasible in our time span. RefineDet, SNIP and SNIPER did either not have code that could be executed by us due to hardware constraints or did not include the necessary documentation to train a model. This was quite disappointing since SNIP and SNIPER seemed very promising due to their scale invariance. This left us with the YoloV4 algorithm. This network had good documentation on how to train a model and community support. Below some more details on this:
@@ -125,8 +126,25 @@ Filter out the golf balls with small bounding boxes from the original training d
 
 ### Training Method
 
-## Experiments and Results
+### Pre-processing Test Images
+Additionally we have tried pre-processing test images with the goal of improving the test results. In order to do this, multiple image adjustment features where tried using openCV. The final image adjustment features which visually delivered promising results where: 
+1) Applying a sharpness kernel
+```python
+sharpening_filter = np.array([[0,-1,0],
+                              [-1,5,-1],
+                              [0,-1,0]])
+sharpened_image = cv2.filter2D(image,-1,sharpening_filter)
+cv2_imshow(sharpened_image)
+```
+2) Filtering and justing pixel based on their brightness level
+```python
+ret, thresh = cv2.threshold(image, 105, 255, cv2.THRESH_TOZERO)
+cv2_imshow(thresh)
+```
+ There results can be seen in the "Experiments and Results" section.
 
+## Experiments and Results
+### Pre-processing Test Images results
 ## Conclusion
 
 ## Discussion
