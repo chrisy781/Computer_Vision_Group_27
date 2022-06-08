@@ -152,6 +152,10 @@ cv2_imshow(thresh)
 ![Brightness_tozero](/figures/brightness_filter_2.jpeg)
 *Figure 7: Shows the detection results on the YoloV4 network using a test image in which the pixels below a brightness below 105 are set to zero*
 
+It can been seen that testing the normal image showed a total of 5 detected golf balls with varying probabilities. Testing on the sharpness enhanced image actually resulted in a total of 6 golf balls being detected and testing on the brightness of pixels below a value of 105 reduced to zero actually delivered a total number of just 2 golf balls being detected. 
+The sharpness enhancement using a kernel in openCV thus looks promosing at first sight but when taking a closer look you'll see probabilities of the 6 detections contained some golf balls with higher and some with lower probabilties compared to the original image. Afterwards the image adjustment features where tried on more images but this time the was no improvement to be seen compared to the original image.
+
+For the reason we concluded that pre-processing the test image using a sharpness enhancing kernel or a feature for setting the pixels below a brightness below 105 to zero, is not a valid way of improving the amount of golf balls detected in our project.
 
 ## Conclusion
 
