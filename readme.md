@@ -4,7 +4,7 @@
 | ------------------ | ---------- | ---------------------------------- |
 | Christiaan Wiers   | 4715349    | C.W.M.Wiers@student.tudelft.nl     |
 | Stijn Lafontaine   | 4908457    | S.C.Lafontaine@student.tudelft.nl  |
-| Floris             |            | ...@student.tudelft.nl             |
+| Floris             | 4602706    | F.C.K.Krijgsman@student.tudelft.nl |
 
 ![Driving_range](/figures/drivingrange.jpg)
 
