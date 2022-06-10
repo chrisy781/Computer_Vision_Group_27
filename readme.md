@@ -95,7 +95,10 @@ The following techniques were used on the first dataset **OpenImagesV6**:
 3. Rotate images left/right
 
 
-**Tiling** is a method where the image is cut in multiple smaller images by use of a grid. The purpose of which is to improve the detection performance of the network. This method is proposed in a paper by Li et al. [9]. Li et al. state that it can be successfully applied to the localization and recognition of pesticides on leaves. The researchers show that their application is ideally suited for multi-scale object detection. We think this technique might be applicable to our case as we also try to detect very small objects on a uniform background. In the image, the impact of tiling can be seen on the accuracy of a network. The top pictures are without tiling applied as data-augmentation step, the bottom pictures with tiling technique applied. ![Pesticides](/figures/Pesticides.png)
+**Tiling** is a method where the image is cut in multiple smaller images by use of a grid. The purpose of which is to improve the detection performance of the network. This method is proposed in a paper by Li et al. [9]. Li et al. state that it can be successfully applied to the localization and recognition of pesticides on leaves. The researchers show that their application is ideally suited for multi-scale object detection. We think this technique might be applicable to our case as we also try to detect very small objects on a uniform background. In the image, the impact of tiling can be seen on the accuracy of a network. The top pictures are without tiling applied as data-augmentation step, the bottom pictures with tiling technique applied. 
+
+![Pesticides](/figures/Pesticides.png)
+
 
 The following techniques were used on the second dataset (Roboflow):
 1. Brightness increase/decrease
@@ -128,12 +131,14 @@ Filter out the golf balls with small bounding boxes from the original training d
 ### Training Method
 To train the YoloV4 network, Google Colab is used. Both the OpenImagesV6 and golfBall Image datasets are trained with and without tiling to be able to compare. Our goal was to train every method until a loss of 0.5. We put a cap on 1000 iterations to keep the comparison reasonable.
 
-| Dataset        | Data Augmentation |
-| ---------------| ----------------- |
-| OpenImagesV6   | None              |
-| OpenImagesV6   | Tiling            |
-| golfBall Image | None              |
-| golfBall Image | Tiling            |
+| Dataset        | Data Augmentation | images |
+| ---------------| ----------------- | ------ |
+| OpenImagesV6   | None              | 456    |
+| OpenImagesV6   | Tiling            | 1129   |
+| golfBall Image | None              | -----  |
+| golfBall Image | Tiling            | 54021  |
+
+The tiling generates ofcourse more images than the original dataset. For the OpenImagesV6 dataset we removed quite some data as this was not suited for tiling. Therefore, a little bit more than double the data is generated. Also, for the golfBall Image dataset around 1000 images were removed that could not be tiled. After the tiling process, the data should be put in an obj map. This map has to be compressed to a zip to be used in the Google Colab.
 
 ### Pre-processing Test Images
 Additionally we have tried pre-processing test images with the goal of improving the test results. In order to do this, multiple image adjustment features where tried using openCV. The final image adjustment features which visually delivered promising results where: 
