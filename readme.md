@@ -76,15 +76,15 @@ SPP-block, SAM-block, PAN path-aggregation block,
 DIoU-NMS
 
 ### Datasets
-Two different datasets were used to train separate YoloV4 models to compare. The first dataset was taken from the **OpenImagesV6*. The second dataset was found on "universe.roboflow.com"
+Two different datasets were used to train separate YoloV4 models to compare. The first dataset was taken from the **OpenImagesV6**. The second dataset was found on "universe.roboflow.com"
 
 ![Dataset1](/figures/Dataset1.jpg)
 
-*Figure 1: Sample from dataset 1*
+*Figure 1: Sample from OpenImagesV6 dataset*
 
 ![Dataset2](/figures/Dataset2.jpg)
 
-*Figure 2: Sample from dataset2*
+*Figure 2: Sample from golfBall Image dataset*
 
 ### Data augmentation
 We applied data augmentation on both datasets. 
