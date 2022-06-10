@@ -76,7 +76,7 @@ SPP-block, SAM-block, PAN path-aggregation block,
 DIoU-NMS
 
 ### Datasets
-Two different datasets were used to train separate YoloV4 models to compare. The first dataset was found on **WEBSITE DATASET 1*. The second dataset was found on "universe.roboflow.com"
+Two different datasets were used to train separate YoloV4 models to compare. The first dataset was taken from the **OpenImagesV6*. The second dataset was found on "universe.roboflow.com"
 
 ![Dataset1](/figures/Dataset1.jpg)
 
@@ -89,12 +89,13 @@ Two different datasets were used to train separate YoloV4 models to compare. The
 ### Data augmentation
 We applied data augmentation on both datasets. 
 
-The following techniques were used on the first dataset **NAME**:
-1. Brightness increase/decrease
-2. Rotate images left/right
-3. Tiling
+The following techniques were used on the first dataset **OpenImagesV6**:
+1. Tiling
+2. Brightness increase/decrease
+3. Rotate images left/right
 
-**Tiling** is a method where the image is cut in multiple smaller images by use of a grid. This is a form of data augmentation. These smaller images then form the input of a model to train on. This method is proposed in a paper by Li et al. [9]
+
+**Tiling** is a method where the image is cut in multiple smaller images by use of a grid. The purpose of which is to improve the detection performance of the network. This method is proposed in a paper by Li et al. [9]. Li et al. state that it can be successfully applied to the localization and recognition of pesticides on leaves. The researchers show that their application is ideally suited for multi-scale object detection. We think this technique might be applicable to our case as we also try to detect very small objects on a uniform background. ![Pesticides](/figures/pesticide.jpg)
 
 The following techniques were used on the second dataset (Roboflow):
 1. Brightness increase/decrease
@@ -122,9 +123,17 @@ YoloV4 itself comes with data augmentation as well. It makes use of the followin
 
 **Self-Adversarial Training** is a form of data augmentation where the forward pass of the network is used to augment the input image. Instead of one forward pass and one backward pass it performs the forward pass twice. First on the input image, then it alters the input image to create the deception that there is no object in the input image. Then it performs forwards pass on that augmented image and then regular backward pass.
 
-Filter out the golf balls with small bounding boxes from the original training dataset and tiling those images (cutting those image up into small smaller images). The ideas behind this is that training on only those tiled and thus very small images will increase the networks ability to detect the small golf balls located at long distances on the driving range since those are small as well.
+Filter out the golf balls with small bounding boxes from the original training dataset and tiling those images (cutting those image up into small smaller images). The ideas behind this is that training on only those tiled and thus very small images will increase the networks' ability to detect the small golf balls located at long distances on the driving range since those are small as well.
 
 ### Training Method
+To train the YoloV4 network, Google Colab is used. Both the OpenImagesV6 and golfBall Image datasets are trained with and without tiling to be able to compare. Our goal was to train every method until a loss of 0.5. We put a cap on 1000 iterations to keep the comparison reasonable
+
+| Dataset        | Data Augmentation |
+| ---------------| ----------------- |
+| OpenImagesV6   | None              |
+| OpenImagesV6   | Tiling            |
+| golfBall Image | None              |
+| golfBall Image | Tiling            |
 
 ### Pre-processing Test Images
 Additionally we have tried pre-processing test images with the goal of improving the test results. In order to do this, multiple image adjustment features where tried using openCV. The final image adjustment features which visually delivered promising results where: 
