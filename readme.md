@@ -179,7 +179,7 @@ For the reason we concluded that pre-processing the test image using a sharpness
 ![set2_test3](/figures/results/result_test_3.png)
 ![set2_test4](/figures/results/result_test_4.png)
 
-![set2_generalize](/figures/results/driving_range.png)
+![set2_generalize](/figures/results/result_driving_range.png)
 
 ## Conclusion
 
