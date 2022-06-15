@@ -174,12 +174,23 @@ The sharpness enhancement using a kernel in openCV thus looks promosing at first
 For the reason we concluded that pre-processing the test image using a sharpness enhancing kernel or a feature for setting the pixels below a brightness below 105 to zero, is not a valid way of improving the amount of golf balls detected in our project.
 
 ### Dataset 2 results
+mAP on test set of 81.60%!
 ![set2_test1](/figures/results/result_test_1.png)
 ![set2_test2](/figures/results/result_test_2.png)
 ![set2_test3](/figures/results/result_test_3.png)
 ![set2_test4](/figures/results/result_test_4.png)
 
 ![set2_generalize](/figures/results/result_driving_range.png)
+
+detections_count = 1770, unique_truth_count = 500  
+class_id = 0, name = Golf-ball, ap = 81.60%   	 (TP = 443, FP = 280) 
+
+ for conf_thresh = 0.25, precision = 0.61, recall = 0.89, F1-score = 0.72 
+ for conf_thresh = 0.25, TP = 443, FP = 280, FN = 57, average IoU = 44.33 % 
+
+ IoU threshold = 50 %, used Area-Under-Curve for each unique Recall 
+ mean average precision (mAP@0.50) = 0.815996, or 81.60 % 
+Total Detection Time: 463 Seconds
 
 ## Conclusion
 
