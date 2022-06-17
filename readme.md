@@ -49,12 +49,7 @@ When using neural networks there are a lot of factors that may form timing consu
 Along with the well acknowledged paper on YoloV4, we also made use of a blog post [7] covering some details about how to train a model yourself.
 
 #### 3.1.1 Architecture
-
-#### 3.1.2 Yolo history
-**EXPANATION YOLO, YOLOV2, YOLOV3 in a nutshell**
-
-#### 3.1.3 YoloV4
-**PARTS USED IN YOLOV4, building on history**
+The architecture described below is based on the paper from Bochkovskiy et al [1] and the blog post from Vivek Praharska [10]. Just like the original Yolo, YoloV4 is a one-stage detector. This means that it processes an image just once, predicting the bounding boxes and classes in one go. This makes the algorithm fast. YoloV4 uses the darknet framework, which is a high performance framework that is written in C and CUDA. Darnknet is its backbone (more specifically CSPDarknet53). Darknet basically performs the object detection task, consisting of a regression task (for the bounding boxes) and classification task (object classes).
 Backbone: CSPDarknet53
 • Neck: SPP  PAN 
 • Head: YOLOv3 
@@ -213,3 +208,4 @@ Total Detection Time: 463 Seconds
 7. https://techzizou.com/train-a-custom-yolov4-detector-using-google-colab-tutorial-for-beginners/
 8. Yun, S., Han, D., Oh, S. J., Chun, S., Choe, J., & Yoo, Y. (2019). Cutmix: Regularization strategy to train strong classifiers with localizable features. In Proceedings of the IEEE/CVF international conference on computer vision (pp. 6023-6032).
 9. Li, R., Wang, R., Zhang, J., Xie, C., Liu, L., Wang, F., ... & Liu, W. (2019). An effective data augmentation strategy for CNN-based pest localization and recognition in the field. IEEE Access, 7, 160274-160283.
+10. Blog post Vivek Praharska https://iq.opengenus.org/yolov4-model-architecture/
