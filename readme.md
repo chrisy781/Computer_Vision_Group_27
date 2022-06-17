@@ -151,12 +151,12 @@ Filter out the golf balls with small bounding boxes from the original training d
 ### 3.4 Training Method
 To train the YoloV4 network, Google Colab is used. Both the OpenImagesV6 and golfBall Image datasets are trained with and without tiling to be able to compare. Our goal was to train every method until a loss of 0.55. We put a cap on 2000 iterations to keep the comparison reasonable.
 
-| Dataset        | Data Augmentation | images | avg Loss | train mAP | test mAp |
-| ---------------| ----------------- | ------ | -------- | --------- | -------- |
-| OpenImagesV6   | None              | 456    |   0.55   |    88%    |          |
-| OpenImagesV6   | Tiling            | 1129   |          |           |          |
-| golfBall Image | None              | 54021  |   0.38   |    87%    |   82%    |
-| golfBall Image | Tiling            | 54021  |          |           |          |
+| Dataset        | Data Augmentation | images | avg Loss | train mAP | test mAp(%) |
+| ---------------| ----------------- | ------ | -------- | --------- | ----------- |
+| OpenImagesV6   | None              | 456    |   0.55   |    88%    |             |
+| OpenImagesV6   | Tiling            | 1129   |   0.49   |           |    62.9     |
+| golfBall Image | None              | 54021  |   0.38   |    87%    |    82       |
+| golfBall Image | Tiling            | 54021  |   0.64   |           |    69.5     |
 
 The tiling generates ofcourse more images than the original dataset. For the OpenImagesV6 dataset we removed quite some data as this was not suited for tiling. Therefore, a little bit more than double the data is generated. Also, for the golfBall Image dataset around 1000 images were removed that could not be tiled. After the tiling process, the data should be put in an ```obj``` map. This map has to be compressed to a zip to be used in the Google Colab. In the picture below, an example of an image is shown where tiles are taken out of. Most of the times the tiling algorithm takes 2-3 tiles out of an image.
 
@@ -183,7 +183,7 @@ cv2_imshow(thresh)
 ## 4 Experiments and Results
 Various experiments and results have been performed and obtained. In this section it will be shown first what results have been obtained by running YoloV4 on 4 different images from the original dataset's testset. Secondly the results are shown from running YoloV4 on pre-processing test images. After this results are shown from testing on the YoloV4 model trained on the new (larger) dataset and lastly results are shown from YoloV4 trained on a tiled version of the new (larger) dataset.
 
-### 4.1 Results on normal dataset test images
+### 4.1 Results on OpenImagesV6 test images
 ![Normal](/figures/orginal_tests2.jpg)
 
 *Figure 6: Shows the YoloV4 detection results on 4 randomly chosen images from the test set*
@@ -201,8 +201,8 @@ The sharpness enhancement using a kernel in openCV thus looks promosing at first
 
 For the reason we concluded that pre-processing the test image using a sharpness enhancing kernel or a feature for setting the pixels below a brightness below 105 to zero, is not a valid way of improving the amount of golf balls detected in our project.
 
-### 4.3 Dataset 2 results
-The mean average precision on this  dataset is 81.60%. The figure below shows the results on the test set of this dataset
+### 4.3 golfBall Image results
+The mean average precision on this  dataset is 81.60%. The figure below shows the results on the test set of this dataset 
 
 ![Normal](/figures/dataset2_results.jpg)
 
@@ -214,8 +214,17 @@ Although this model performs well on the test set ...
 
 Total Detection Time: 463 Seconds
 
+#### Tiling
+The mean
+Pipeline for testing images using tiling is as follows:
+1. Images are cut up into tiles
+2. The detector tries to detect a golfball in every tile
+3. The image is put back together
+
+The figure below shows the result on the tiled testset
+![Normal](/figures/tiled_golfBall_result.jpg)
 ## 5. Conclusion
-In summary we trained and evaluated four different YoloV4 models. Two models for each dataset, OpenImagesV6 and Roboflow Golfballs. Both datasets were augmented to enlarge them. The first model of each dataset was trained on the images as a whole, the second model was trained on tiled images. There were  differences between the two datasets, especially on the generalization side. OpenImagesV6 performed better on the driving range situation that Roboflow Golfballs. The tiling method .... Finally the model trained on the OpenImagesV6 dataset performed the best on both the test set of that dataset as the driving range.
+In summary we trained and evaluated four different YoloV4 models. Two models for each dataset, OpenImagesV6 and Roboflow's golfBall Image. Both datasets were augmented to enlarge them. The first model of each dataset was trained on the images as a whole, the second model was trained on tiled images. There were  differences between the two datasets, especially on the generalization side. OpenImagesV6 performed better on the driving range situation that Roboflow's golfBall Image. The tiling method .... Finally the model trained on the OpenImagesV6 dataset performed the best on both the test set of that dataset as the driving range.
 
 ## 6. Discussion
 There are many different areas that could be changed to obtain other results. The first and most infuential would be the use of another model than YoloV4. The other models as described in the introduction could be implemented and used to obtain possible better results. YoloV4 itself is also complex. It used many different techniques to come to the state-of-the-art performances on the ImageNet and COCO datasets. However the hyperparameters in YoloV4 are optimized towards those datasets, and not ours. We could do a hyperparameter search using Random Search or an evolutionary algorithm to find optimal hyperparameters for the datasets that we used. That brings us to the datasets used. Both datasets were different and resulted in different performances. The main difficulty was to generalize towards our "real life application", namely detecting golfballs on the driving range. A dataset consisting of solely driving ranges would be best to perform detection on, because such dataset will come as close as possible to the real life situation.
