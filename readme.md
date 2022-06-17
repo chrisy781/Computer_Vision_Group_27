@@ -297,8 +297,6 @@ Below the results on the driving range can be seen.
 
 Although this model performs well on the test set, it performs not so well on the driving range. This can be due to multiple reasons. The first being the fact that most data in the **Roboflow Golfballs** dataset consists of images that just contain one golfball per image. Secondly, the **Roboflow Golfballs** dataset is made of samples from streaming data from golball videos. This makes the quality of the images different than that of the driving range, which can have a negative effect as well. Lastly the annotations in the **Roboflow dataset** were not of great quality. Some bounding boxes were not annotated precisely around the golfball, making it difficult for the model to learn how it should place its bounding boxes.
 
-Total Detection Time: 463 Seconds
-
 #### Tiling
 The pipeline for testing images using tiling is as follows:
 1. Images are cut up into tiles
