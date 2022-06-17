@@ -169,7 +169,7 @@ cv2_imshow(thresh)
 Various experiments and results have been performed and obtained. In this section it will be shown first what results have been obtained by running YoloV4 on 4 different images from the original dataset's testset. Secondly the results are shown from running YoloV4 on pre-processing test images. After this results are shown from testing on the YoloV4 model trained on the new (larger) dataset and lastly results are shown from YoloV4 trained on a tiled version of the new (larger) dataset.
 
 ### 4.1 Results on normal dataset test images
-![Normal](/figures/orginal_tests.jpg)
+![Normal](/figures/orginal_tests2.jpg)
 
 *Figure 6: Shows the YoloV4 detection results on 4 randomly chosen images from the test set*
 
