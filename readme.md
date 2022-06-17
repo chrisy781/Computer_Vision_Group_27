@@ -206,6 +206,7 @@ The pipeline for testing images using tiling is as follows:
 3. The image is put back together
 
 The figure below shows the result on the tiled testset:
+
 ![Normal](figures/tiled_open_images_2.png)
 *Figure 15: results on the tiled OpenImagesV6 set*
 
