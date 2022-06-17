@@ -187,10 +187,10 @@ cv2_imshow(sharpened_image)
 ret, thresh = cv2.threshold(image, 105, 255, cv2.THRESH_TOZERO)
 cv2_imshow(thresh)
 ```
- There results can be seen in section 4.2 "Pre-processing Test Images results".
+The final results can be seen in section 4.2 "Pre-processing Test Images results". Also the Google Colab script made and used is named "openCV_pre_processing.ipynb" and can be found on the files section of this GitHub page.
 
 ## 4 Experiments and Results
-Various experiments and results have been performed and obtained. For each model, results on both the test set of the model and the driving range are shown, along with their mean average precicion.
+Various experiments and results have been performed and obtained. For each model, results on both the test set of the model and the driving range are shown, along with the probalities of the predictions.
 
 ### 4.1 Results on OpenImagesV6 test images
 ![Normal](/figures/orginal_tests2.jpg)
