@@ -123,7 +123,7 @@ The following techniques were used on the first dataset **OpenImagesV6**:
 
 **Tiling** is a method where the image is cut in multiple smaller images by use of a grid. The purpose of which is to improve the detection performance of the network. This method is proposed in a paper by Li et al. [9]. Li et al. state that it can be successfully applied to the localization and recognition of pesticides on leaves. The researchers show that their application is ideally suited for multi-scale object detection. We think this technique might be applicable to our case as we also try to detect very small objects on a uniform background. In the image, the impact of tiling can be seen on the accuracy of a network. The top pictures are without tiling applied as data-augmentation step, the bottom pictures with tiling technique applied. 
 
-Below the code for the tiling:
+Below the code for the tiling of the test images (train is similar):
 
 ```python
 def datapipeline(path, im_name):
