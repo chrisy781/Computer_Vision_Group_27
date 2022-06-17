@@ -151,12 +151,12 @@ Filter out the golf balls with small bounding boxes from the original training d
 ### 3.4 Training Method
 To train the YoloV4 network, Google Colab is used. Both the OpenImagesV6 and golfBall Image datasets are trained with and without tiling to be able to compare. Our goal was to train every method until a loss of 0.55. We put a cap on 2000 iterations to keep the comparison reasonable.
 
-| Dataset        | Data Augmentation | images | avg Loss | train mAP | test mAp(%) |
-| ---------------| ----------------- | ------ | -------- | --------- | ----------- |
-| OpenImagesV6   | None              | 456    |   0.55   |    88%    |             |
-| OpenImagesV6   | Tiling            | 1129   |   0.49   |           |    62.9     |
-| golfBall Image | None              | 54021  |   0.38   |    87%    |    82       |
-| golfBall Image | Tiling            | 54021  |   0.64   |           |    69.5     |
+| Dataset        | Data Augmentation | images | avg Loss |   mAp(%)  |
+| ---------------| ----------------- | ------ | -------- | --------- |
+| OpenImagesV6   | None              | 456    |   0.55   |    88%    |             
+| OpenImagesV6   | Tiling            | 1129   |   0.49   |   62.9    |
+| golfBall Image | None              | 54021  |   0.38   |    87%    |    82       
+| golfBall Image | Tiling            | 3918   |   0.64   |   69.5    |     
 
 The tiling generates ofcourse more images than the original dataset. For the OpenImagesV6 dataset we removed quite some data as this was not suited for tiling. Therefore, a little bit more than double the data is generated. Also, for the golfBall Image dataset around 1000 images were removed that could not be tiled. After the tiling process, the data should be put in an ```obj``` map. This map has to be compressed to a zip to be used in the Google Colab. In the picture below, an example of an image is shown where tiles are taken out of. Most of the times the tiling algorithm takes 2-3 tiles out of an image.
 
@@ -215,14 +215,17 @@ Although this model performs well on the test set ...
 Total Detection Time: 463 Seconds
 
 #### Tiling
-The mean
-Pipeline for testing images using tiling is as follows:
+The pipeline for testing images using tiling is as follows:
 1. Images are cut up into tiles
 2. The detector tries to detect a golfball in every tile
 3. The image is put back together
 
 The figure below shows the result on the tiled testset
 ![Normal](/figures/tiled_golfBall_results.png)
+
+Results on the driving range are not shown since the detector was not able to detect any golfballs.
+
+
 ## 5. Conclusion
 In summary we trained and evaluated four different YoloV4 models. Two models for each dataset, OpenImagesV6 and Roboflow's golfBall Image. Both datasets were augmented to enlarge them. The first model of each dataset was trained on the images as a whole, the second model was trained on tiled images. There were  differences between the two datasets, especially on the generalization side. OpenImagesV6 performed better on the driving range situation that Roboflow's golfBall Image. The tiling method .... Finally the model trained on the OpenImagesV6 dataset performed the best on both the test set of that dataset as the driving range.
 
