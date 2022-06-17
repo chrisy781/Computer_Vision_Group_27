@@ -131,12 +131,12 @@ Filter out the golf balls with small bounding boxes from the original training d
 ### 3.4 Training Method
 To train the YoloV4 network, Google Colab is used. Both the OpenImagesV6 and golfBall Image datasets are trained with and without tiling to be able to compare. Our goal was to train every method until a loss of 0.5. We put a cap on 1000 iterations to keep the comparison reasonable.
 
-| Dataset        | Data Augmentation | images |
-| ---------------| ----------------- | ------ |
-| OpenImagesV6   | None              | 456    |
-| OpenImagesV6   | Tiling            | 1129   |
-| golfBall Image | None              | -----  |
-| golfBall Image | Tiling            | 54021  |
+| Dataset        | Data Augmentation | images | avg Loss | mAP |
+| ---------------| ----------------- | ------ | -------- | --- |
+| OpenImagesV6   | None              | 456    |   0.55   | 88% |
+| OpenImagesV6   | Tiling            | 1129   |          |     |
+| golfBall Image | None              | -----  |          |     |
+| golfBall Image | Tiling            | 54021  |          |     |
 
 The tiling generates ofcourse more images than the original dataset. For the OpenImagesV6 dataset we removed quite some data as this was not suited for tiling. Therefore, a little bit more than double the data is generated. Also, for the golfBall Image dataset around 1000 images were removed that could not be tiled. After the tiling process, the data should be put in an ```obj``` map. This map has to be compressed to a zip to be used in the Google Colab. In the picture below, an example of an image is shown where tiles are taken out of. Most of the times the tiling algorithm takes 2-3 tiles out of an image.
 ![Tiling example](/figures/tiled.png)
