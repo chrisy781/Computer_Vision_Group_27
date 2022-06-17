@@ -171,7 +171,7 @@ The sharpness enhancement using a kernel in openCV thus looks promosing at first
 
 For the reason we concluded that pre-processing the test image using a sharpness enhancing kernel or a feature for setting the pixels below a brightness below 105 to zero, is not a valid way of improving the amount of golf balls detected in our project.
 
-![Normal](/figures/original_tests.jpg)
+![Normal](/figures/orginal_tests.jpg)
 
 *Figure 5: Shows the YoloV4 detection results on 4 randomly chosen images from the test set*
 
