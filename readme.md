@@ -192,6 +192,7 @@ For the reason we concluded that pre-processing the test image using a sharpness
 
 ### 4.3 Dataset 2 results
 mAP on test set of 81.60%!
+![Normal](/figures/dataset2_results.jpg)
 ![set2_test1](/figures/results/result_test_1.png)
 ![set2_test2](/figures/results/result_test_2.png)
 ![set2_test3](/figures/results/result_test_3.png)
