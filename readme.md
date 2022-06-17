@@ -59,19 +59,21 @@ YoloV4 consists of three main parts,
 The backbone:
 YoloV4 uses the darknet framework, which is a high performance framework that is written in C and CUDA. Darnknet is its backbone, more specifically CSPDarknet53. CSPDarknet53 basically performs feature extraction, using convolutions and dense connections. Dense connections are like residual connections in ResNet, but also contain a dense layer in between. This performs some feature extraction in the residual connections, only letting the most important features through. The goal of the Dense connections is the same as in the residual connections in ResNet, namely alleviating the problem of the vanishing gradient.
 
+![set2_test1](/figures/yolo_architecture/csp.png)
+
 The neck:
 This part consists of two main parts, an SPP Block and PANet. Spatial Pyramid Pooling (SPP) is a block of multiple pooling layers with different pool size, of which all the outputs are then concatenated together. This increases the receptive field of the rest of the network. The paper by He et al. describes SPP in more detail [12]
 
-PICTURE
+![set2_test1](/figures/yolo_architecture/ssp.png)
 
 PANet is used to shorten the information flow from input to top features. This is achieved by the used of three different techniques: Bottom-up Path Augmentation, Adaptive Feature Pooling & Fully-Connected Fusion. These techniques are fully described in the paper by Liu et al. [11]
 
-PICTURE
+![set2_test1](/figures/yolo_architecture/panet.png)
 
 The head:
 This part is the same as the head of the YoloV3 Network, as described in the paper of Redmon et al. [13]. It predicts the values of the bounding boxes according to below:
 
-PICTURE 
+![set2_test1](/figures/yolo_architecture/yolov3_head.png)
 
 Additionals:
 Dropblock: just like Dropout, only instead of dropping one feature, it drops a block of features. This is a better regulization technique than Dropout for object detection. The method is described in the paper by Ghiasi et al. [15]
