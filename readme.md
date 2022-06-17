@@ -263,8 +263,6 @@ The figure below shows the result on the tiled testset:
 
 *Figure 15: results on the tiled OpenImagesV6 set*
 
-driving_range_tiled_open_images.png
-
 Below the results on the driving range can be seen:
 
 ![Normal](/figures/driving_range_tiled_open_images_2.png)
