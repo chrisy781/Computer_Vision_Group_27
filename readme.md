@@ -159,6 +159,7 @@ To train the YoloV4 network, Google Colab is used. Both the OpenImagesV6 and gol
 | golfBall Image | Tiling            | 54021  |          |           |          |
 
 The tiling generates ofcourse more images than the original dataset. For the OpenImagesV6 dataset we removed quite some data as this was not suited for tiling. Therefore, a little bit more than double the data is generated. Also, for the golfBall Image dataset around 1000 images were removed that could not be tiled. After the tiling process, the data should be put in an ```obj``` map. This map has to be compressed to a zip to be used in the Google Colab. In the picture below, an example of an image is shown where tiles are taken out of. Most of the times the tiling algorithm takes 2-3 tiles out of an image.
+
 ![Tiling example](/figures/tiled.png)
 
 
