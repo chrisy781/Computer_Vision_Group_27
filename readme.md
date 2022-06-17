@@ -206,7 +206,7 @@ The pipeline for testing images using tiling is as follows:
 3. The image is put back together
 
 The figure below shows the result on the tiled testset:
-[Normal](/figures/Tiled_open_images.png)
+[Normal](/figures/tiled_open_images_2.png)
 *Figure 15: results on the tiled OpenImagesV6 set*
 
 ### 4.2 Pre-processing Test Images results
@@ -245,7 +245,7 @@ The pipeline for testing images using tiling is as follows:
 
 The figure below shows the result on the tiled testset
 
-![Normal](/figures/tiled_golfBall_results.png)
+![Normal](/figures/tiled_golfBall.png)
 
 *Figure 19: results on the tiled Roboflow Golfballs set*
 
