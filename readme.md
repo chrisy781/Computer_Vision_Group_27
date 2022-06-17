@@ -199,10 +199,20 @@ Various experiments and results have been performed and obtained. For each model
 
 Testing the 4 random images from the original testset (figure 6) gave varying but for the most part successful results with golf balls being detected and having probabilities north of 67%. It also stands out that the images on the top-left of figure 6 shows high confidences on the most nearby golf ball location but does not detect the second golf ball also on the buttom-right image only shows 2 out 3 golf balls. The hypothesis for this is the loss which is only 0.55 and thus could become even lower when more training is performed and that way possibly solving this troubling result.
 
+#### Tiling
+The pipeline for testing images using tiling is as follows:
+1. Images are cut up into tiles
+2. The detector tries to detect a golfball in every tile
+3. The image is put back together
+
+The figure below shows the result on the tiled testset:
+[Normal](/figures/Tiled_open_images.png)
+*Figure 15: results on the tiled OpenImagesV6 set*
+
 ### 4.2 Pre-processing Test Images results
 ![Normal](/figures/pre_processing_results_done.jpg)
 
-*Figure 15: Shows from top to buttom the detection results using YoloV4 on a non pre-processed test image, a test image in which the pixels below a brightness below 105 are set to zero and a sharpness enhanced test image repsectively*
+*Figure 16: Shows from top to buttom the detection results using YoloV4 on a non pre-processed test image, a test image in which the pixels below a brightness below 105 are set to zero and a sharpness enhanced test image repsectively*
 
 
 It can been seen that testing the normal image showed a total of 5 detected golf balls with varying probabilities (figure 5). Testing on the sharpness enhanced image actually resulted in a total of 6 golf balls being detected and testing on the brightness of pixels below a value of 105 reduced to zero actually delivered a total number of just 2 golf balls being detected. 
@@ -215,13 +225,13 @@ The figure below shows the results on the test set of this dataset. As can be se
 
 ![Normal](/figures/dataset2_results.jpg)
 
-*Figure 16: results on the test set*
+*Figure 17: results on the test set*
 
 Below the results on the driving range can be seen.
 
 ![set2_generalize](/figures/results/result_driving_range.png)
 
-*Figure 17: results on the driving range*
+*Figure 18: results on the driving range*
 
 Although this model performs well on the test set, it performs not so well on the driving range. This can be due to multiple reasons. The first being the fact that most data in the **Roboflow Golfballs** dataset consists of images that just contain one golfball per image. Secondly, the **Roboflow Golfballs** dataset is made of samples from streaming data from golball videos. This makes the quality of the images different than that of the driving range, which can have a negative effect as well. Lastly the annotations in the **Roboflow dataset** were not of great quality. Some bounding boxes were not annotated precisely around the golfball, making it difficult for the model to learn how it should place its bounding boxes.
 
@@ -237,7 +247,7 @@ The figure below shows the result on the tiled testset
 
 ![Normal](/figures/tiled_golfBall_results.png)
 
-*Figure 18: results on the tiled Roboflow Golfballs set*
+*Figure 19: results on the tiled Roboflow Golfballs set*
 
 Results on the driving range are not shown since the detector was not able to detect any golfballs.
 
