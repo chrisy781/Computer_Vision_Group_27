@@ -263,7 +263,7 @@ The figure below shows the result on the tiled testset:
 
 *Figure 15: results on the tiled OpenImagesV6 set*
 
-Below the results on the driving range can be seen:
+The figure below shows the result on the driving range example using the tiled OpenImagesV6 trained model:
 
 ![Normal](/figures/driving_range_tiled_open_images_2.png)
 
@@ -280,14 +280,14 @@ The sharpness enhancement using a kernel in openCV thus looks promosing at first
 
 For the reason we concluded that pre-processing the test image using a sharpness enhancing kernel or a feature for setting the pixels below a brightness below 105 to zero, is not a valid way of improving the amount of golf balls detected in our project.
 
-### 4.3 Roboflow Golballs results
-The figure below shows the results on the test set of this dataset. As can be seen it produces high confidence for the golballs it detects, although it also detects a golfball twice.
+### 4.3 Roboflow golfBalls results
+The figure below shows the results on the test set of this dataset. As can be seen, it produces high confidence for the golballs it detects, although it also detects a golfball twice.
 
 ![Normal](/figures/dataset2_results.jpg)
 
 *Figure 18: results on the test set*
 
-Below the results on the driving range can be seen.
+The figure below shows the result on the driving range example using the Roboflow golfBalls trained model:
 
 ![set2_generalize](/figures/results/result_driving_range.png)
 
