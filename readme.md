@@ -222,7 +222,7 @@ Pipeline for testing images using tiling is as follows:
 3. The image is put back together
 
 The figure below shows the result on the tiled testset
-![Normal](/figures/tiled_golfBall_result.jpg)
+![Normal](/figures/tiled_golfBall_results.png)
 ## 5. Conclusion
 In summary we trained and evaluated four different YoloV4 models. Two models for each dataset, OpenImagesV6 and Roboflow's golfBall Image. Both datasets were augmented to enlarge them. The first model of each dataset was trained on the images as a whole, the second model was trained on tiled images. There were  differences between the two datasets, especially on the generalization side. OpenImagesV6 performed better on the driving range situation that Roboflow's golfBall Image. The tiling method .... Finally the model trained on the OpenImagesV6 dataset performed the best on both the test set of that dataset as the driving range.
 
