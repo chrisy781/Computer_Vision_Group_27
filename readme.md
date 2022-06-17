@@ -166,7 +166,7 @@ To train the YoloV4 network, Google Colab is used. Both the **OpenImagesV6** and
 | golfBall Image | None              | 7000   |   0.38   |    87%    |    82       
 | golfBall Image | Tiling            | 3918   |   0.64   |   69.5    |     
 
-The tiling generates of course more images than the original dataset. For the **OpenImagesV6** dataset we removed quite some data as this was not suited for tiling because these were close up images of golfballs. Therefore, a little bit more than double the data is generated. The **Roboflow Golfballs** dataset is quite a large dataset. Sadly, Google Colab and Google Drive could not handle the large dataset so we had to make it smaller to be able to train. In the picture below, an example of an image is shown where tiles are taken out of. Most of the times the tiling algorithm takes 2-3 tiles out of an image.
+The tiling generates of course more images than the original dataset. For the **OpenImagesV6** dataset we removed quite some data as this was not suited for tiling because these were close up images of golfballs. Therefore, a little bit more than double the data is generated. The **Roboflow Golfballs** dataset is quite a large dataset. Sadly, Google Colab and Google Drive could not handle the large dataset so we had to make it smaller to be able to train. In the picture below, an example of an image is shown where tiles are taken out of. Most of the times the tiling algorithm takes 2-3 tiles out of an image. For tiling the training data, check our ![Tiling script](tile_img.py) to use it on your data. Further, there is a ![Remove faulty](remove_faulty_pictures.py) that will remove the pictures that are not suited for training.
 
 ![Tiling example](/figures/tiled.png)
 
@@ -191,6 +191,57 @@ The final results can be seen in section 4.2 "Pre-processing Test Images results
 
 ## 4 Experiments and Results
 Various experiments and results have been performed and obtained. For each model, results on both the test set of the model and the driving range are shown, along with the probalities of the predictions.
+
+1) tiling the images
+```
+def datapipeline(path, im_name):
+  '''
+  This function takes image path 
+  and image names as arguments
+  and divides the images into 
+  blocks (tiles) and detects 
+  objects in individual
+  blocks (tiles). Finally, the 
+  blocks are stitched 
+  together and detected images
+  are displayed.
+  '''
+  
+  colors = [
+      (190, 200, 68)
+  ]
+
+  obj_names = [
+             "Golf-ball"
+  ]
+  
+  # read image and make tiles each of dimensions size x size
+  ext = im_name.split(".")[-1]
+  im = imread(path + im_name)
+  size = 5
+  cv2_imshow(im)
+  h, w, _ = im.shape
+  h_new = ceil(h/size) * size
+  w_new = ceil(w/size) * size
+  scale_h = h_new/h
+  scale_w = w_new/w
+  resized_im = resize(im, (w_new, h_new), INTER_LINEAR)
+  !rm -rf "/mydrive/yolov4_2/tiled_images/" #edit this to your own path
+  !mkdir "/mydrive/yolov4_2/tiled_images/" #edit this to your own path
+  tiled_images_path = "/mydrive/yolov4_2/tiled_images/" #edit this to your own path
+  
+  tiled_ims_list = []
+  for i in range(h_new//size):
+    for j in range(w_new//size):
+      tiled = resized_im[i*size : (i+1)*size, j*size : (j+1)*size, :]
+      tiled_im_name = tiled_images_path + im_name.split(".")[0] + "_" + str(i) + "_" + str(j) + "." + ext
+      tiled_ims_list.append(tiled_im_name)
+      df = DataFrame(tiled_ims_list)
+      # saving the path of tiled images so as to feed it to yolo model
+      df.to_csv("/mydrive/yolov4_2/tiled_images/tiled_images.txt", index = False, header = False) #edit this to your own path
+      # saving tiled image
+      imwrite(tiled_im_name, tiled)
+```
 
 ### 4.1 Results on OpenImagesV6 test images
 ![Normal](/figures/orginal_tests2.jpg)
@@ -255,7 +306,7 @@ Results on the driving range are not shown since the detector was not able to de
 
 
 ## 5. Conclusion
-In summary we trained and evaluated four different YoloV4 models. Two models for each datasets (“OpenImagesV6” & “Roboflow’s GolfBalls”). Both datasets were augmented to enlarge them. The first model of each dataset was trained on the images as a whole, the second model was trained on tiled images. There were differences between the two datasets, especially on the generalization side. The OpenImagesV6 trained networks performed better on the driving range situation that Roboflow golfballs trained networks. The tiling method showed improved performance on individual golf balls when tested using the OpenImages dataset, especially on the Roboflow’s GolfBall dataset compared to the non-tiled models. However, the tiled models did not perform as well on the driving range. This ismost likely due to weak capability of generalizations.  In conclusion, the model trained on the OpenImagesV6 dataset performed the best on both the test set of that dataset as well as the driving range.
+In summary, we trained and evaluated four different YoloV4 models. Two models for each datasets (“OpenImagesV6” & “Roboflow’s GolfBalls”). Both datasets were augmented to enlarge them. The first model of each dataset was trained on the images as a whole, the second model was trained on tiled images. There were differences between the two datasets, especially on the generalization side. The OpenImagesV6 trained networks performed better on the driving range situation that Roboflow golfballs trained networks. The tiling method showed improved performance on individual golf balls when tested using the OpenImages dataset, especially on the Roboflow’s GolfBall dataset compared to the non-tiled models. However, the tiled models did not perform as well on the driving range. This ismost likely due to weak capability of generalizations.  In conclusion, the model trained on the OpenImagesV6 dataset performed the best on both the test set of that dataset as well as the driving range.
 
 ## 6. Discussion
 There are many different areas that could be changed to obtain other results. The first and most infuential would be the use of another model than YoloV4. The other models as described in the introduction could be implemented and used to obtain possible better results. YoloV4 itself is also complex. It used many different techniques to come to the state-of-the-art performances on the ImageNet and COCO datasets. However, the hyperparameters in YoloV4 are optimized towards those datasets, and not ours. We could do a hyperparameter search using Random Search or an evolutionary algorithm to find optimal hyperparameters for the datasets that we used. That brings us to the datasets used. Both datasets were different and resulted in different performances. The main difficulty was to generalize towards our "real life application", namely detecting golfballs on the driving range. A dataset consisting of solely driving ranges would be best to perform detection on, because such dataset will come as close as possible to the real life situation.
