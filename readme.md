@@ -175,7 +175,9 @@ For the reason we concluded that pre-processing the test image using a sharpness
 
 ![Normal](/figures/orginal_tests.jpg)
 
-*Figure 5: Shows the YoloV4 detection results on 4 randomly chosen images from the test set*
+*Figure 6: Shows the YoloV4 detection results on 4 randomly chosen images from the test set*
+
+Testing the 4 random images from the original testset (figure 6) gave varying but for the most part successful results with golf balls being detected and having probabilities north of 79%. It also stands out that the images on the top-left of figure 6 shows high confidences on locations where no golf balls are present and thus being false positives. The hypothesis for this is the loss of only 0.5 with could become even lower when more training is performed and that way possibly solving this troubling result.
 
 ### 4.2 Dataset 2 results
 mAP on test set of 81.60%!
