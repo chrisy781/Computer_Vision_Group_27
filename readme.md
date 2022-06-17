@@ -162,13 +162,9 @@ cv2_imshow(thresh)
 ## Experiments and Results
 ### Pre-processing Test Images results
 ![Normal](/figures/pre_processing_results_done.jpg)
+
 *Figure 5: Shows from top to buttom the detection results using YoloV4 on a non pre-processed test image, a test image in which the pixels below a brightness below 105 are set to zero and a sharpness enhanced test image repsectively*
-![Normal](/figures/normal_2.jpeg)
-*Figure 5: Shows the detection results on the YoloV4 network using a none pre-precossed test image*
-![Sharpness](/figures/sharpness_kernel_2.jpeg)
-*Figure 6: Shows the detection results on the YoloV4 network using a sharpness enhanced test image*
-![Brightness_tozero](/figures/brightness_filter_2.jpeg)
-*Figure 7: Shows the detection results on the YoloV4 network using a test image in which the pixels below a brightness below 105 are set to zero*
+
 
 It can been seen that testing the normal image showed a total of 5 detected golf balls with varying probabilities (Figure 5). Testing on the sharpness enhanced image actually resulted in a total of 6 golf balls being detected (Figure 6) and testing on the brightness of pixels below a value of 105 reduced to zero actually delivered a total number of just 2 golf balls being detected (Figure 7). 
 The sharpness enhancement using a kernel in openCV thus looks promosing at first sight but when taking a closer look at Figure 6, you'll see probabilities of the 6 detections contained some golf balls with higher and some with lower probabilties compared to the original image (Figure 5). Afterwards the image adjustment features where tried on more images but this time there was no improvement to be seen compared to the original image.
