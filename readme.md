@@ -157,12 +157,19 @@ cv2_imshow(sharpened_image)
 ret, thresh = cv2.threshold(image, 105, 255, cv2.THRESH_TOZERO)
 cv2_imshow(thresh)
 ```
- There results can be seen in the "Experiments and Results" section.
+ There results can be seen in section 4.2 "Pre-processing Test Images results".
 
 ## 4 Experiments and Results
 Various experiments and results have been performed and obtained. In this section it will be shown first what results have been obtained by running YoloV4 on 4 different images from the original dataset's testset. Secondly the results are shown from running YoloV4 on pre-processing test images. After this results are shown from testing on the YoloV4 model trained on the new (larger) dataset and lastly results are shown from YoloV4 trained on a tiled version of the new (larger) dataset.
 
-### 4.1 Pre-processing Test Images results
+### 4.1 Results on normal dataset test images
+![Normal](/figures/orginal_tests.jpg)
+
+*Figure 6: Shows the YoloV4 detection results on 4 randomly chosen images from the test set*
+
+Testing the 4 random images from the original testset (figure 6) gave varying but for the most part successful results with golf balls being detected and having probabilities north of 79%. It also stands out that the images on the top-left of figure 6 shows high confidences on locations where no golf balls are present and thus being false positives. The hypothesis for this is the loss of only 0.5 with could become even lower when more training is performed and that way possibly solving this troubling result.
+
+### 4.2 Pre-processing Test Images results
 ![Normal](/figures/pre_processing_results_done.jpg)
 
 *Figure 5: Shows from top to buttom the detection results using YoloV4 on a non pre-processed test image, a test image in which the pixels below a brightness below 105 are set to zero and a sharpness enhanced test image repsectively*
@@ -173,13 +180,7 @@ The sharpness enhancement using a kernel in openCV thus looks promosing at first
 
 For the reason we concluded that pre-processing the test image using a sharpness enhancing kernel or a feature for setting the pixels below a brightness below 105 to zero, is not a valid way of improving the amount of golf balls detected in our project.
 
-![Normal](/figures/orginal_tests.jpg)
-
-*Figure 6: Shows the YoloV4 detection results on 4 randomly chosen images from the test set*
-
-Testing the 4 random images from the original testset (figure 6) gave varying but for the most part successful results with golf balls being detected and having probabilities north of 79%. It also stands out that the images on the top-left of figure 6 shows high confidences on locations where no golf balls are present and thus being false positives. The hypothesis for this is the loss of only 0.5 with could become even lower when more training is performed and that way possibly solving this troubling result.
-
-### 4.2 Dataset 2 results
+### 4.3 Dataset 2 results
 mAP on test set of 81.60%!
 ![set2_test1](/figures/results/result_test_1.png)
 ![set2_test2](/figures/results/result_test_2.png)
