@@ -123,6 +123,58 @@ The following techniques were used on the first dataset **OpenImagesV6**:
 
 **Tiling** is a method where the image is cut in multiple smaller images by use of a grid. The purpose of which is to improve the detection performance of the network. This method is proposed in a paper by Li et al. [9]. Li et al. state that it can be successfully applied to the localization and recognition of pesticides on leaves. The researchers show that their application is ideally suited for multi-scale object detection. We think this technique might be applicable to our case as we also try to detect very small objects on a uniform background. In the image, the impact of tiling can be seen on the accuracy of a network. The top pictures are without tiling applied as data-augmentation step, the bottom pictures with tiling technique applied. 
 
+Below the code for the tiling:
+
+```python
+def datapipeline(path, im_name):
+  '''
+  This function takes image path 
+  and image names as arguments
+  and divides the images into 
+  blocks (tiles) and detects 
+  objects in individual
+  blocks (tiles). Finally, the 
+  blocks are stitched 
+  together and detected images
+  are displayed.
+  '''
+  
+  colors = [
+      (190, 200, 68)
+  ]
+
+  obj_names = [
+             "Golf-ball"
+  ]
+  
+  # read image and make tiles each of dimensions size x size
+  ext = im_name.split(".")[-1]
+  im = imread(path + im_name)
+  size = 5
+  cv2_imshow(im)
+  h, w, _ = im.shape
+  h_new = ceil(h/size) * size
+  w_new = ceil(w/size) * size
+  scale_h = h_new/h
+  scale_w = w_new/w
+  resized_im = resize(im, (w_new, h_new), INTER_LINEAR)
+  !rm -rf "/mydrive/yolov4_2/tiled_images/" #edit this to your own path
+  !mkdir "/mydrive/yolov4_2/tiled_images/" #edit this to your own path
+  tiled_images_path = "/mydrive/yolov4_2/tiled_images/" #edit this to your own path
+  
+  tiled_ims_list = []
+  for i in range(h_new//size):
+    for j in range(w_new//size):
+      tiled = resized_im[i*size : (i+1)*size, j*size : (j+1)*size, :]
+      tiled_im_name = tiled_images_path + im_name.split(".")[0] + "_" + str(i) + "_" + str(j) + "." + ext
+      tiled_ims_list.append(tiled_im_name)
+      df = DataFrame(tiled_ims_list)
+      # saving the path of tiled images so as to feed it to yolo model
+      df.to_csv("/mydrive/yolov4_2/tiled_images/tiled_images.txt", index = False, header = False) #edit this to your own path
+      # saving tiled image
+      imwrite(tiled_im_name, tiled)
+```
+
 ![Pesticides](/figures/Pesticides.png)
 
 *Figure 10: shows the application of tiling in pesticide detection*
@@ -191,57 +243,6 @@ The final results can be seen in section 4.2 "Pre-processing Test Images results
 
 ## 4 Experiments and Results
 Various experiments and results have been performed and obtained. For each model, results on both the test set of the model and the driving range are shown, along with the probalities of the predictions.
-
-Tiling the images:
-```python
-def datapipeline(path, im_name):
-  '''
-  This function takes image path 
-  and image names as arguments
-  and divides the images into 
-  blocks (tiles) and detects 
-  objects in individual
-  blocks (tiles). Finally, the 
-  blocks are stitched 
-  together and detected images
-  are displayed.
-  '''
-  
-  colors = [
-      (190, 200, 68)
-  ]
-
-  obj_names = [
-             "Golf-ball"
-  ]
-  
-  # read image and make tiles each of dimensions size x size
-  ext = im_name.split(".")[-1]
-  im = imread(path + im_name)
-  size = 5
-  cv2_imshow(im)
-  h, w, _ = im.shape
-  h_new = ceil(h/size) * size
-  w_new = ceil(w/size) * size
-  scale_h = h_new/h
-  scale_w = w_new/w
-  resized_im = resize(im, (w_new, h_new), INTER_LINEAR)
-  !rm -rf "/mydrive/yolov4_2/tiled_images/" #edit this to your own path
-  !mkdir "/mydrive/yolov4_2/tiled_images/" #edit this to your own path
-  tiled_images_path = "/mydrive/yolov4_2/tiled_images/" #edit this to your own path
-  
-  tiled_ims_list = []
-  for i in range(h_new//size):
-    for j in range(w_new//size):
-      tiled = resized_im[i*size : (i+1)*size, j*size : (j+1)*size, :]
-      tiled_im_name = tiled_images_path + im_name.split(".")[0] + "_" + str(i) + "_" + str(j) + "." + ext
-      tiled_ims_list.append(tiled_im_name)
-      df = DataFrame(tiled_ims_list)
-      # saving the path of tiled images so as to feed it to yolo model
-      df.to_csv("/mydrive/yolov4_2/tiled_images/tiled_images.txt", index = False, header = False) #edit this to your own path
-      # saving tiled image
-      imwrite(tiled_im_name, tiled)
-```
 
 ### 4.1 Results on OpenImagesV6 test images
 ![Normal](/figures/orginal_tests2.jpg)
