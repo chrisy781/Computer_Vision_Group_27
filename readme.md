@@ -192,7 +192,7 @@ The final results can be seen in section 4.2 "Pre-processing Test Images results
 ## 4 Experiments and Results
 Various experiments and results have been performed and obtained. For each model, results on both the test set of the model and the driving range are shown, along with the probalities of the predictions.
 
-1) tiling the images
+Tiling the images:
 ```
 def datapipeline(path, im_name):
   '''
