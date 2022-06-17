@@ -193,7 +193,7 @@ The final results can be seen in section 4.2 "Pre-processing Test Images results
 Various experiments and results have been performed and obtained. For each model, results on both the test set of the model and the driving range are shown, along with the probalities of the predictions.
 
 Tiling the images:
-```
+```python
 def datapipeline(path, im_name):
   '''
   This function takes image path 
@@ -205,7 +205,7 @@ def datapipeline(path, im_name):
   blocks are stitched 
   together and detected images
   are displayed.
-  '''python
+  '''
   
   colors = [
       (190, 200, 68)
