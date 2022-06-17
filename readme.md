@@ -263,10 +263,18 @@ The figure below shows the result on the tiled testset:
 
 *Figure 15: results on the tiled OpenImagesV6 set*
 
+driving_range_tiled_open_images.png
+
+Below the results on the driving range can be seen:
+
+![Normal](/figures/driving_range_tiled_open_images.png)
+
+*Figure 16: result on the driving range image*
+
 ### 4.2 Pre-processing Test Images results
 ![Normal](/figures/pre_processing_results_done.jpg)
 
-*Figure 16: Shows from top to buttom the detection results using YoloV4 on a non pre-processed test image, a test image in which the pixels below a brightness below 105 are set to zero and a sharpness enhanced test image repsectively*
+*Figure 17: Shows from top to buttom the detection results using YoloV4 on a non pre-processed test image, a test image in which the pixels below a brightness below 105 are set to zero and a sharpness enhanced test image repsectively*
 
 
 It can been seen that testing the normal image showed a total of 5 detected golf balls with varying probabilities (figure 5). Testing on the sharpness enhanced image actually resulted in a total of 6 golf balls being detected and testing on the brightness of pixels below a value of 105 reduced to zero actually delivered a total number of just 2 golf balls being detected. 
@@ -279,13 +287,13 @@ The figure below shows the results on the test set of this dataset. As can be se
 
 ![Normal](/figures/dataset2_results.jpg)
 
-*Figure 17: results on the test set*
+*Figure 18: results on the test set*
 
 Below the results on the driving range can be seen.
 
 ![set2_generalize](/figures/results/result_driving_range.png)
 
-*Figure 18: results on the driving range*
+*Figure 19: results on the driving range*
 
 Although this model performs well on the test set, it performs not so well on the driving range. This can be due to multiple reasons. The first being the fact that most data in the **Roboflow Golfballs** dataset consists of images that just contain one golfball per image. Secondly, the **Roboflow Golfballs** dataset is made of samples from streaming data from golball videos. This makes the quality of the images different than that of the driving range, which can have a negative effect as well. Lastly the annotations in the **Roboflow dataset** were not of great quality. Some bounding boxes were not annotated precisely around the golfball, making it difficult for the model to learn how it should place its bounding boxes.
 
@@ -301,13 +309,13 @@ The figure below shows the result on the tiled testset
 
 ![Normal](/figures/tiled_golfBall.png)
 
-*Figure 19: results on the tiled Roboflow Golfballs set*
+*Figure 20: results on the tiled Roboflow Golfballs set*
 
 Results on the driving range are not shown since the detector was not able to detect any golfballs.
 
 
 ## 5. Conclusion
-In summary, we trained and evaluated four different YoloV4 models. Two models for each datasets (“OpenImagesV6” & “Roboflow’s GolfBalls”). Both datasets were augmented to enlarge them. The first model of each dataset was trained on the images as a whole, the second model was trained on tiled images. There were differences between the two datasets, especially on the generalization side. The OpenImagesV6 trained networks performed better on the driving range situation that Roboflow golfballs trained networks. The tiling method showed improved performance on individual golf balls when tested using the OpenImages dataset, especially on the Roboflow’s GolfBall dataset compared to the non-tiled models. However, the tiled models did not perform as well on the driving range. This ismost likely due to weak capability of generalizations.  In conclusion, the model trained on the OpenImagesV6 dataset performed the best on both the test set of that dataset as well as the driving range.
+In summary, we trained and evaluated four different YoloV4 models. Two models for each datasets (“OpenImagesV6” & “Roboflow’s GolfBalls”). Both datasets were augmented to enlarge them. The first model of each dataset was trained on the images as a whole, the second model was trained on tiled images. There were differences between the two datasets, especially on the generalization side. The OpenImagesV6 trained networks performed better on the driving range situation that Roboflow golfballs trained networks. The tiling method showed improved performance on individual golf balls when tested using the OpenImages dataset, especially on the Roboflow’s GolfBall dataset compared to the non-tiled models. However, the tiled models did not perform as well on the driving range. This is most likely due to weak capability of generalizations.  In conclusion, the model trained on the OpenImagesV6 dataset performed the best on both the test set of that dataset as well as the driving range.
 
 ## 6. Discussion
 There are many different areas that could be changed to obtain other results. The first and most infuential would be the use of another model than YoloV4. The other models as described in the introduction could be implemented and used to obtain possible better results. YoloV4 itself is also complex. It used many different techniques to come to the state-of-the-art performances on the ImageNet and COCO datasets. However, the hyperparameters in YoloV4 are optimized towards those datasets, and not ours. We could do a hyperparameter search using Random Search or an evolutionary algorithm to find optimal hyperparameters for the datasets that we used. That brings us to the datasets used. Both datasets were different and resulted in different performances. The main difficulty was to generalize towards our "real life application", namely detecting golfballs on the driving range. A dataset consisting of solely driving ranges would be best to perform detection on, because such dataset will come as close as possible to the real life situation.
