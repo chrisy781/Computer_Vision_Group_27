@@ -49,26 +49,35 @@ When using neural networks there are a lot of factors that may form timing consu
 Along with the well acknowledged paper on YoloV4, we also made use of a blog post [7] covering some details about how to train a model yourself.
 
 #### 3.1.1 Architecture
-The architecture described below is based on the paper from Bochkovskiy et al [1] and the blog post from Vivek Praharska [10]. Just like the original Yolo, YoloV4 is a one-stage detector. This means that it processes an image just once, predicting the bounding boxes and classes in one go. This makes the algorithm fast. YoloV4 uses the darknet framework, which is a high performance framework that is written in C and CUDA. Darnknet is its backbone (more specifically CSPDarknet53). Darknet basically performs the object detection task, consisting of a regression task (for the bounding boxes) and classification task (object classes).
-Backbone: CSPDarknet53
-• Neck: SPP  PAN 
-• Head: YOLOv3 
-YOLO v4 uses:
-• Bag of Freebies (BoF) for backbone: CutMix and
-Mosaic data augmentation, DropBlock regularization,
-Class label smoothing
-• Bag of Specials (BoS) for backbone: Mish activa-
-tion, Cross-stage partial connections (CSP), Multi-
-input weighted residual connections (MiWRC)
-• Bag of Freebies (BoF) for detector: CIoU-loss,
-CmBN, DropBlock regularization, Mosaic data aug-
-mentation, Self-Adversarial Training, Eliminate grid
-sensitivity, Using multiple anchors for a single ground
-truth, Cosine annealing scheduler [52], Optimal hyper-
-parameters, Random training shapes
-• Bag of Specials (BoS) for detector: Mish activation,
-SPP-block, SAM-block, PAN path-aggregation block,
-DIoU-NMS
+The architecture described below is based on the paper from Bochkovskiy et al [1] and the blog post from Vivek Praharska [10]. Just like the original Yolo, YoloV4 is a one-stage detector. This means that it processes an image just once, predicting the bounding boxes and classes in one go. This makes the algorithm fast. 
+
+YoloV4 consists of three main parts,
+1. The backbone: Darknet
+2. The neck: an SPP Block + PANet
+3. The head: YoloV3
+
+The backbone:
+YoloV4 uses the darknet framework, which is a high performance framework that is written in C and CUDA. Darnknet is its backbone, more specifically CSPDarknet53. CSPDarknet53 basically performs feature extraction, using convolutions and dense connections. Dense connections are like residual connections in ResNet, but also contain a dense layer in between. This performs some feature extraction in the residual connections, only letting the most important features through. The goal of the Dense connections is the same as in the residual connections in ResNet, namely alleviating the problem of the vanishing gradient.
+
+The neck:
+This part consists of two main parts, an SPP Block and PANet. Spatial Pyramid Pooling (SPP) is a block of multiple pooling layers with different pool size, of which all the outputs are then concatenated together. This increases the receptive field of the rest of the network. The paper by He et al. describes SPP in more detail [12]
+
+PICTURE
+
+PANet is used to shorten the information flow from input to top features. This is achieved by the used of three different techniques: Bottom-up Path Augmentation, Adaptive Feature Pooling & Fully-Connected Fusion. These techniques are fully described in the paper by Liu et al. [11]
+
+PICTURE
+
+The head:
+This part is the same as the head of the YoloV3 Network, as described in the paper of Redmon et al. [13]. It predicts the values of the bounding boxes according to below:
+
+PICTURE 
+
+Additionals:
+Dropblock: just like Dropout, only instead of dropping one feature, it drops a block of features. This is a better regulization technique than Dropout for object detection. The method is described in the paper by Ghiasi et al. [15]
+
+Class label smoothing: the class label is smoothed to prevent over-fitting. This is done by making a linear combination of the class label and a uniform distributed variable. This adds noise to the label, working like a regulizer. Muller et al. [14] describe why this method works as a regulizer. 
+
 
 ### 3.2 Datasets
 Two different datasets were used to train separate YoloV4 models to compare. The first dataset was taken from the **OpenImagesV6**. The second dataset was found on "universe.roboflow.com"
@@ -209,3 +218,8 @@ Total Detection Time: 463 Seconds
 8. Yun, S., Han, D., Oh, S. J., Chun, S., Choe, J., & Yoo, Y. (2019). Cutmix: Regularization strategy to train strong classifiers with localizable features. In Proceedings of the IEEE/CVF international conference on computer vision (pp. 6023-6032).
 9. Li, R., Wang, R., Zhang, J., Xie, C., Liu, L., Wang, F., ... & Liu, W. (2019). An effective data augmentation strategy for CNN-based pest localization and recognition in the field. IEEE Access, 7, 160274-160283.
 10. Blog post Vivek Praharska https://iq.opengenus.org/yolov4-model-architecture/
+11. 11. Liu, S., Qi, L., Qin, H., Shi, J., & Jia, J. (2018). Path aggregation network for instance segmentation. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 8759-8768).
+12. He, K., Zhang, X., Ren, S., & Sun, J. (2015). Spatial pyramid pooling in deep convolutional networks for visual recognition. IEEE transactions on pattern analysis and machine intelligence, 37(9), 1904-1916.
+13. Redmon, J., & Farhadi, A. (2018). Yolov3: An incremental improvement. arXiv preprint arXiv:1804.02767.
+14. Müller, R., Kornblith, S., & Hinton, G. E. (2019). When does label smoothing help?. Advances in neural information processing systems, 32.
+15. Ghiasi, G., Lin, T. Y., & Le, Q. V. (2018). Dropblock: A regularization method for convolutional networks. Advances in neural information processing systems, 31.
