@@ -17,7 +17,7 @@
 6. Discussion 
 
 ## 1. Abstract
-In this project the goal is to research and apply computer vision methods to detect golf balls in a photo of a driving range. This is one of the classic problems in computer vision, namely object detection. The challenge here is that golf balls up front will be larger and more easy to detect for a computer vision algorithm whereas the golf balls more far away and thus smaller are much harder to detect for these algorithms, due to the scarcity of pixel information. The algorithm used to perform the object detection is YoloV4 [1]. This is a state-of-the art object detection algorithm proposed by Bochkovskiy et al. Multiple models were trained using this algorithm. The models differ in datasets and data augmentation used. **ADD RESULTS SUMMARY AND PICTURE RESULTS**
+In this project the goal is to research and apply computer vision methods to detect golf balls in a photo of a driving range. This is one of the classic problems in computer vision, namely object detection. The challenge here is that golf balls up front will be larger and more easy to detect for a computer vision algorithm whereas the golf balls more far away and thus smaller are much harder to detect for these algorithms, due to the scarcity of pixel information. The algorithm used to perform the object detection is YoloV4 [1]. This is a state-of-the art object detection algorithm proposed by Bochkovskiy et al. Multiple models were trained using this algorithm. The models differ in datasets and data augmentation used. The mAP scores on each of the datasets is promising, but the results on the driving ranges are yield a lower performance. The lower performance is mainly due to the datasets not generalizing towards the application (detecting on the driving range).
 
 
 ## 2. Introduction
@@ -60,15 +60,18 @@ The backbone:
 YoloV4 uses the darknet framework, which is a high performance framework that is written in C and CUDA. Darnknet is its backbone, more specifically CSPDarknet53. CSPDarknet53 basically performs feature extraction, using convolutions and dense connections. Dense connections are like residual connections in ResNet, but also contain a dense layer in between. This performs some feature extraction in the residual connections, only letting the most important features through. The goal of the Dense connections is the same as in the residual connections in ResNet, namely alleviating the problem of the vanishing gradient.
 
 ![set2_test1](/figures/yolo_architecture/csp.png)
+*This figure shows the CSPDarknet53 architecture*
 
 The neck:
 This part consists of two main parts, an SPP Block and PANet. Spatial Pyramid Pooling (SPP) is a block of multiple pooling layers with different pool size, of which all the outputs are then concatenated together. This increases the receptive field of the rest of the network. The paper by He et al. describes SPP in more detail [12]
 
 ![set2_test1](/figures/yolo_architecture/spp.png)
+*This figure shows the Spatial Pyramid Pooling architecture*
 
 PANet is used to shorten the information flow from input to top features. This is achieved by the used of three different techniques: Bottom-up Path Augmentation, Adaptive Feature Pooling & Fully-Connected Fusion. These techniques are fully described in the paper by Liu et al. [11]
 
 ![set2_test1](/figures/yolo_architecture/panet.png)
+*This figure shows the PANet architecture*
 
 The head:
 This part is the same as the head of the YoloV3 Network, as described in the paper of Redmon et al. [13]. It predicts the values of the bounding boxes according to below:
@@ -79,10 +82,12 @@ Additionals:
 Dropblock: just like Dropout, only instead of dropping one feature, it drops a block of features. This is a better regulization technique than Dropout for object detection. The method is described in the paper by Ghiasi et al. [15]
 
 ![set2_test1](/figures/yolo_architecture/dropblock.png)
+*This figure shows the workings of dropblock (c), dropout (b)*
 
 Class label smoothing: the class label is smoothed to prevent over-fitting. This is done by making a linear combination of the class label and a uniform distributed variable. This adds noise to the label, working like a regulizer. Muller et al. [14] describe why this method works as a regulizer. 
 
 ![set2_test1](/figures/yolo_architecture/rsz_class_label_smoothing.png)
+*This figure the influence of class label smoothing on multiple datasets*
 
 
 ### 3.2 Datasets
@@ -141,12 +146,12 @@ Filter out the golf balls with small bounding boxes from the original training d
 ### 3.4 Training Method
 To train the YoloV4 network, Google Colab is used. Both the OpenImagesV6 and golfBall Image datasets are trained with and without tiling to be able to compare. Our goal was to train every method until a loss of 0.55. We put a cap on 2000 iterations to keep the comparison reasonable.
 
-| Dataset        | Data Augmentation | images | avg Loss | mAP |
-| ---------------| ----------------- | ------ | -------- | --- |
-| OpenImagesV6   | None              | 456    |   0.55   | 88% |
-| OpenImagesV6   | Tiling            | 1129   |          |     |
-| golfBall Image | None              | 54021  |   0.38   | 82% |
-| golfBall Image | Tiling            | 54021  |          |     |
+| Dataset        | Data Augmentation | images | avg Loss | train mAP | test mAp |
+| ---------------| ----------------- | ------ | -------- | --------- | -------- |
+| OpenImagesV6   | None              | 456    |   0.55   |    88%    |          |
+| OpenImagesV6   | Tiling            | 1129   |          |           |          |
+| golfBall Image | None              | 54021  |   0.38   |    87%    |   82%    |
+| golfBall Image | Tiling            | 54021  |          |           |          |
 
 The tiling generates ofcourse more images than the original dataset. For the OpenImagesV6 dataset we removed quite some data as this was not suited for tiling. Therefore, a little bit more than double the data is generated. Also, for the golfBall Image dataset around 1000 images were removed that could not be tiled. After the tiling process, the data should be put in an ```obj``` map. This map has to be compressed to a zip to be used in the Google Colab. In the picture below, an example of an image is shown where tiles are taken out of. Most of the times the tiling algorithm takes 2-3 tiles out of an image.
 ![Tiling example](/figures/tiled.png)
