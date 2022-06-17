@@ -64,7 +64,7 @@ YoloV4 uses the darknet framework, which is a high performance framework that is
 The neck:
 This part consists of two main parts, an SPP Block and PANet. Spatial Pyramid Pooling (SPP) is a block of multiple pooling layers with different pool size, of which all the outputs are then concatenated together. This increases the receptive field of the rest of the network. The paper by He et al. describes SPP in more detail [12]
 
-![set2_test1](/figures/yolo_architecture/ssp.png)
+![set2_test1](/figures/yolo_architecture/spp.png)
 
 PANet is used to shorten the information flow from input to top features. This is achieved by the used of three different techniques: Bottom-up Path Augmentation, Adaptive Feature Pooling & Fully-Connected Fusion. These techniques are fully described in the paper by Liu et al. [11]
 
@@ -78,7 +78,11 @@ This part is the same as the head of the YoloV3 Network, as described in the pap
 Additionals:
 Dropblock: just like Dropout, only instead of dropping one feature, it drops a block of features. This is a better regulization technique than Dropout for object detection. The method is described in the paper by Ghiasi et al. [15]
 
+![set2_test1](/figures/yolo_architecture/dropblock.png)
+
 Class label smoothing: the class label is smoothed to prevent over-fitting. This is done by making a linear combination of the class label and a uniform distributed variable. This adds noise to the label, working like a regulizer. Muller et al. [14] describe why this method works as a regulizer. 
+
+![set2_test1](/figures/yolo_architecture/rsz_class_label_smoothing.png)
 
 
 ### 3.2 Datasets
