@@ -205,7 +205,7 @@ def datapipeline(path, im_name):
   blocks are stitched 
   together and detected images
   are displayed.
-  '''
+  '''python
   
   colors = [
       (190, 200, 68)
