@@ -96,7 +96,7 @@ Class label smoothing: the class label is smoothed to prevent over-fitting. This
 
 
 ### 3.2 Datasets
-Two different datasets were used to train separate YoloV4 models to compare. The first dataset was taken from the **OpenImagesV6**. The second dataset was found on "universe.roboflow.com"
+Two different datasets were used to train separate YoloV4 models to compare. The first dataset was taken from the **OpenImagesV6**. The second dataset was found on "universe.roboflow.com", the **Roboflow Golfballs** dataset
 
 ![Dataset1](/figures/Dataset1.jpg)
 
@@ -104,7 +104,7 @@ Two different datasets were used to train separate YoloV4 models to compare. The
 
 ![Dataset2](/figures/Dataset2.jpg)
 
-*Figure 2: Sample from golfBall Image dataset*
+*Figure 2: Sample from Roboflow Golfball dataset*
 
 ### 3.3 Data augmentation
 We applied data augmentation on both datasets. 
@@ -123,7 +123,7 @@ The following techniques were used on the first dataset **OpenImagesV6**:
 The following techniques were used on the second dataset (Roboflow):
 1. Brightness increase/decrease
 
-The second dataset did not need the rotation and tiling since it contained more datapoints. Tiling was also not feasable since this dataset did not contain many images that contained multiple golfballs
+The **Roboflow Golfballs** dataset did not need the rotation and tiling since it contained more datapoints. Tiling was also not feasable since this dataset did not contain many images that contained multiple golfballs
 
 YoloV4 itself comes with data augmentation as well. It makes use of the following techniques:
 **For the backbone (classifier)[1]:**
@@ -202,24 +202,20 @@ The sharpness enhancement using a kernel in openCV thus looks promosing at first
 For the reason we concluded that pre-processing the test image using a sharpness enhancing kernel or a feature for setting the pixels below a brightness below 105 to zero, is not a valid way of improving the amount of golf balls detected in our project.
 
 ### 4.3 Dataset 2 results
-mAP on test set of 81.60%
+The mean average precision on this  dataset is 81.60%. The figure below shows the results on the test set of this dataset
 
 ![Normal](/figures/dataset2_results.jpg)
 
+Below the results on the driving range can be seen.
 
 ![set2_generalize](/figures/results/result_driving_range.png)
 
-detections_count = 1770, unique_truth_count = 500  
-class_id = 0, name = Golf-ball, ap = 81.60%   	 (TP = 443, FP = 280) 
+Although this model performs well on the test set ... 
 
- for conf_thresh = 0.25, precision = 0.61, recall = 0.89, F1-score = 0.72 
- for conf_thresh = 0.25, TP = 443, FP = 280, FN = 57, average IoU = 44.33 % 
-
- IoU threshold = 50 %, used Area-Under-Curve for each unique Recall 
- mean average precision (mAP@0.50) = 0.815996, or 81.60 % 
 Total Detection Time: 463 Seconds
 
 ## 5. Conclusion
+In summary we trained and evaluated four different YoloV4 models. Two models for each dataset, OpenImagesV6 and Roboflow Golfballs. Both datasets were augmented to enlarge them. The first model of each dataset was trained on the images as a whole, the second model was trained on tiled images. There were  differences between the two datasets, especially on the generalization side. OpenImagesV6 performed better on the driving range situation that Roboflow Golfballs. The tiling method .... Finally the model trained on the OpenImagesV6 dataset performed the best on both the test set of that dataset as the driving range.
 
 ## 6. Discussion
 There are many different areas that could be changed to obtain other results. The first and most infuential would be the use of another model than YoloV4. The other models as described in the introduction could be implemented and used to obtain possible better results. YoloV4 itself is also complex. It used many different techniques to come to the state-of-the-art performances on the ImageNet and COCO datasets. However the hyperparameters in YoloV4 are optimized towards those datasets, and not ours. We could do a hyperparameter search using Random Search or an evolutionary algorithm to find optimal hyperparameters for the datasets that we used. That brings us to the datasets used. Both datasets were different and resulted in different performances. The main difficulty was to generalize towards our "real life application", namely detecting golfballs on the driving range. A dataset consisting of solely driving ranges would be best to perform detection on, because such dataset will come as close as possible to the real life situation.
