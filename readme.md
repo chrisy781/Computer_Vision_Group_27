@@ -267,7 +267,7 @@ driving_range_tiled_open_images.png
 
 Below the results on the driving range can be seen:
 
-![Normal](/figures/driving_range_tiled_open_images.png)
+![Normal](/figures/driving_range_tiled_open_images_2.png)
 
 *Figure 16: result on the driving range image*
 
