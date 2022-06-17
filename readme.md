@@ -145,7 +145,7 @@ To train the YoloV4 network, Google Colab is used. Both the OpenImagesV6 and gol
 | ---------------| ----------------- | ------ | -------- | --- |
 | OpenImagesV6   | None              | 456    |   0.55   | 88% |
 | OpenImagesV6   | Tiling            | 1129   |          |     |
-| golfBall Image | None              | -----  |          |     |
+| golfBall Image | None              | 54021  |   0.38   | 82% |
 | golfBall Image | Tiling            | 54021  |          |     |
 
 The tiling generates ofcourse more images than the original dataset. For the OpenImagesV6 dataset we removed quite some data as this was not suited for tiling. Therefore, a little bit more than double the data is generated. Also, for the golfBall Image dataset around 1000 images were removed that could not be tiled. After the tiling process, the data should be put in an ```obj``` map. This map has to be compressed to a zip to be used in the Google Colab. In the picture below, an example of an image is shown where tiles are taken out of. Most of the times the tiling algorithm takes 2-3 tiles out of an image.
@@ -212,6 +212,7 @@ Total Detection Time: 463 Seconds
 ## 5. Conclusion
 
 ## 6. Discussion
+There are many different areas that could be changed to obtain other results. The first and most infuential would be the use of another model than YoloV4. The other models as described in the introduction could be implemented and used to obtain possible better results. YoloV4 itself is also complex. It used many different techniques to come to the state-of-the-art performances on the ImageNet and COCO datasets. However the hyperparameters in YoloV4 are optimized towards those datasets, and not ours. We could do a hyperparameter search using Random Search or an evolutionary algorithm to find optimal hyperparameters for the datasets that we used. That brings us to the datasets used. Both datasets were different and resulted in different performances. The main difficulty was to generalize towards our "real life application", namely detecting golfballs on the driving range. A dataset consisting of solely driving ranges would be best to perform detection on, because such dataset will come as close as possible to the real life situation.
 
 ## References
 1. Bochkovskiy, A., Wang, C. Y., & Liao, H. Y. M. (2020). Yolov4: Optimal speed and accuracy of object detection. arXiv preprint arXiv:2004.10934.
