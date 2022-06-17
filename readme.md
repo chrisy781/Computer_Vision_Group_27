@@ -173,7 +173,7 @@ Various experiments and results have been performed and obtained. In this sectio
 
 *Figure 6: Shows the YoloV4 detection results on 4 randomly chosen images from the test set*
 
-Testing the 4 random images from the original testset (figure 6) gave varying but for the most part successful results with golf balls being detected and having probabilities north of 79%. It also stands out that the images on the top-left of figure 6 shows high confidences on locations where no golf balls are present and thus being false positives. The hypothesis for this is the loss of only 0.5 with could become even lower when more training is performed and that way possibly solving this troubling result.
+Testing the 4 random images from the original testset (figure 6) gave varying but for the most part successful results with golf balls being detected and having probabilities north of 67%. It also stands out that the images on the top-left of figure 6 shows high confidences on the most nearby golf ball location but does not detect the second golf ball also on the buttom-right image only shows 2 out 3 golf balls. The hypothesis for this is the loss which is only 0.55 and thus could become even lower when more training is performed and that way possibly solving this troubling result.
 
 ### 4.2 Pre-processing Test Images results
 ![Normal](/figures/pre_processing_results_done.jpg)
